@@ -12,11 +12,12 @@ for filename in os.listdir(data_folder):
 
 df = pd.concat(dfs, ignore_index=True)
 
-df = df[df["product"] == "Pink Morsel"]
+df = df[df["product"] == "pink morsel"]
 
+df["price"] = df["price"].str.replace("$", "", regex=False).astype(float)
 df["sales"] = df["quantity"] * df["price"]
 
 df = df[["sales", "date", "region"]]
 
 df.to_csv(output_file, index=False)
-print("Done! Output saved to", output_file)
+print("Done! Rows:", len(df))
